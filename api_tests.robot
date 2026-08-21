@@ -1,7 +1,10 @@
 *** Settings ***
 Library    RequestsLibrary
 Library    Collections
-Suite Setup    Create Session    jsonplaceholder    ${BASE_URL}
+Suite Setup       Create Session    jsonplaceholder    ${BASE_URL}
+Suite Teardown    Log    All API tests finished
+Test Setup        Log    Starting a new test case
+Test Teardown     Log    Test finished, cleaning up if needed
 
 *** Variables ***
 ${BASE_URL}    https://jsonplaceholder.typicode.com
