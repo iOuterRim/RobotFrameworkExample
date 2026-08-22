@@ -1,6 +1,5 @@
 *** Settings ***
-Library    RequestsLibrary
-Library    Collections
+Resource    resources/api_keywords.resource
 Suite Setup       Create Session    jsonplaceholder    ${BASE_URL}
 Suite Teardown    Log    All API tests finished
 Test Setup        Log    Starting a new test case
@@ -9,15 +8,6 @@ Test Teardown     Run Teardown Actions
 *** Variables ***
 ${BASE_URL}    https://jsonplaceholder.typicode.com
 ${created_id}    ${EMPTY}
-
-*** Keywords ***
-Delete Created Post If Exists
-    Run Keyword If    '${created_id}' != '${EMPTY}'
-    ...    DELETE On Session    jsonplaceholder    /posts/${created_id}
-
-Run Teardown Actions
-    Log    Test finished, cleaning up if needed
-    Delete Created Post If Exists
 
 *** Test Cases ***
 Get Single Post Should Return Correct Data
